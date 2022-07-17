@@ -1,15 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { Users } from './components/users';
-import './index.css';
-import reportWebVitals from './reportWebVitals';
+import App from './App';
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-icons/font/bootstrap-icons.json'
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.Fragment>
-      <Users />
-  </React.Fragment>
+  <>
+      <App />
+  </>
 );
 
 
-reportWebVitals();
+
