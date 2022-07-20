@@ -1,30 +1,16 @@
-import React, { useState } from "react";
+import React from "react";  
+import User from "./user";
+const Users = (props) => {
+  const { users } = props;
 
-const Users = ({props,...rest}) => {
-  const propsVal = Object.values(props);
-  const [users, setUsers] = useState(propsVal);
-  console.log(rest);
-
-  return users.map((user) => (
-    <tr key={user._id}>
-      <td>{user.name}</td>
-      <td>{/* <Qualitie {...user} /> */}</td>
-      <td>{user.profession.name}</td>
-      <td>{user.completedMeetings}</td>
-      <td>{user.rate} /5</td>
-      <td>
-        {/* <i onClick={handeleIcon} className="fs-4 bi bi-bookmark"></i> */}
-      </td>
-      <td>
-        <button
-          //   onClick={() => handleDelete(user._id)}
-          className="btn btn-danger"
-        >
-          delete
-        </button>
-      </td>
-    </tr>
-  ));
+  return (
+    
+    <>
+      {users.map((user) => (
+        <User user={user} key={user._id} {...props} />
+      ))}
+    </>
+  );
 };
 
-export default Users;   
+export default Users;

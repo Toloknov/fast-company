@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import SearchStatus from "./components/searchStatus";
-import Qualitie from "./components/qualitie";
+import Users from "./components/users";
 import api from "./api";
-import Users from "./components/users"
+
 const App = () => {
   const [users, setUsers] = useState(api.users.fetchAll());
 
@@ -10,13 +10,16 @@ const App = () => {
     setUsers(users.filter((user) => user._id !== userId));
   };
 
-  const handeleIcon = (event) => {
-    const { target } = event;
-    if (target.className === "fs-4 bi bi-bookmark") {
-      target.className += "-heart-fill";
-    } else {
-      target.className = "fs-4 bi bi-bookmark";
-    }
+  const handeleIcon = (event,id) => {
+    users.filter(user=>{
+      if(user._id===id && event.target.className==="bi bi-bookmark"){
+        event.target.className="bi bi-bookmark-heart-fill"
+      }else if(user._id===id && event.target.className==="bi bi-bookmark-heart-fill"){
+        event.target.className="bi bi-bookmark"
+      }
+    })
+    
+    
   };
 
   return (
@@ -35,32 +38,9 @@ const App = () => {
               <th />
             </tr>
           </thead>
-          
           <tbody>
-          <Users {...users}      />
-            {/* {users.map((user) => (
-              <tr key={user._id}>
-                <td>{user.name}</td>
-                <td>
-                  <Qualitie {...user} />
-                  
-                </td>
-                <td>{user.profession.name}</td>
-                <td>{user.completedMeetings}</td>
-                <td>{user.rate} /5</td>
-                <td>
-                  <i onClick={handeleIcon} className="fs-4 bi bi-bookmark"></i>
-                </td>
-                <td>
-                  <button
-                    onClick={() => handleDelete(user._id)}
-                    className="btn btn-danger"
-                  >
-                    delete
-                  </button>
-                </td>
-              </tr>
-            ))} */}
+            <Users users={users} onDelete={handleDelete} onToogleIcon={handeleIcon}/>
+            
           </tbody>
         </table>
       )}
